@@ -196,6 +196,7 @@ const forgotPassword = async (req, res) => {
 
     user.passwordToken = createHash(passwordToken);
     user.passwordTokenExpirationDate = passwordTokenExpirationDate;
+    console.log("sending the reset password link",passwordToken,passwordTokenExpirationDate)
     await user.save();
   }
 
@@ -209,6 +210,7 @@ const resetPassword = async (req, res) => {
     throw new CustomError.BadRequestError('Please provide all values');
   }
   const user = await User.findOne({ email });
+  console.log(email,password,token,user.passwordToken)
 
   if (user) {
     const currentDate = new Date();
@@ -217,13 +219,13 @@ const resetPassword = async (req, res) => {
       user.passwordToken === createHash(token) &&
       user.passwordTokenExpirationDate > currentDate
     ) {
+      console.log("inside the if")
       user.password = password;
       user.passwordToken = null;
       user.passwordTokenExpirationDate = null;
       await user.save();
     }
   }
-
   res.send('reset password');
 };
 

@@ -37,6 +37,12 @@ const UserSchema = new mongoose.Schema({
     default: false, // during development setting the verified to true, during actual production set it to false
   },
   varified: Date,
+  passwordToken: {
+    type: String,
+  },
+  passwordTokenExpirationDate: {
+    type: Date,
+  },
 });
 UserSchema.pre("save", async function () {
   // console.log(this.modifiedPaths());

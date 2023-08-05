@@ -14,7 +14,7 @@ router.post('/login', login);
 router.delete('/logout',authenticateUser, logout)
 router.post('/verify-email', verfiyEmail); // callled by the frongend
 router.get('/showMe',authenticateUser, showCurrentUser);
-router.route('/reset-password').patch(authenticateUser, resetPassword)
+router.route('/reset-password').patch( resetPassword)
 router.post('/forgot-password', forgotPassword);
 
 
