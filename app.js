@@ -21,6 +21,12 @@ app.use(cors({
   origin: "*" // Replace with the allowed origin(s)
 }));
 
+
+//Swagge
+const swaggerUI = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDoc = YAML.load('./swagger.yaml')
+
 // mongoSanitize is a JavaScript library used to sanitize user input and prevent NoSQL injection attacks specifically in MongoDB databases.
 const mongoSanitize = require("express-mongo-sanitize");
 
@@ -62,6 +68,11 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // app.use(express.static("./public"));
 // app.use(fileUpload());
+app.get('/', (req, res) => {
+  res.send('<h1>Food Order Application API</h1><a href="/api-use">Documentation</a>');
+});
+
+app.use('/api-use',swaggerUI.serve,swaggerUI.setup(swaggerDoc));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/orders", orderRouter);                                                               

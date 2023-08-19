@@ -1,0 +1,402 @@
+openapi: 3.0.0
+info:
+  title: Food Order Api
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:5000/api/v1
+  variables: {}
+paths:
+  /auth/logout:
+    delete:
+      tags:
+      - Auth
+      summary: logout
+      operationId: logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/showMe:
+    get:
+      tags:
+      - Auth
+      summary: show the current user
+      operationId: showme
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/registerrequest'
+              - example:
+                  name: aditi
+                  email: adititarode1@gmail.com
+                  password: secreat
+                  role: teacher
+            example:
+              name: aditi
+              email: adititarode1@gmail.com
+              password: secreat
+              role: teacher
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: login user
+      operationId: loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginuserrequest'
+              - example:
+                  email: shashitarode@gmail.com
+                  password: secreat
+            example:
+              email: shashitarode@gmail.com
+              password: secreat
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/updateUserPassword:
+    patch:
+      tags:
+      - Auth
+      summary: update password
+      operationId: updatepassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updatepasswordrequest'
+              - example:
+                  email: shashitarode@gmail.com
+                  password: secreat
+            example:
+              email: shashitarode@gmail.com
+              password: secreat
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products:
+    get:
+      tags:
+      - Products
+      summary: Get all Products
+      operationId: GetallProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Products
+      summary: create product
+      operationId: createproduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createproductrequest'
+              - example:
+                  name: shashi sectional
+                  price: 109999
+                  colors:
+                  - '#000'
+                  - '#ffb900'
+                  company: liddy
+                  description: Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
+                  category: kitchen
+            example:
+              name: shashi sectional
+              price: 109999
+              colors:
+              - '#000'
+              - '#ffb900'
+              company: liddy
+              description: Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
+              category: kitchen
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product ID
+    get:
+      tags:
+      - Products
+      summary: get single product
+      operationId: getsingleproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - Products
+      summary: update product
+      operationId: updateproduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updateproductrequest'
+              - example:
+                  name: shashi-testing
+            example:
+              name: shashi-testing
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Products
+      summary: delete product
+      operationId: deleteproduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders:
+    post:
+      tags:
+      - Orders
+      summary: create order
+      operationId: createorder
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: '"orderedItems":[{"amount":1,"description":"finest fish and veggies","id":"m1","name":"Sushi","price":22.99},{"amount":1,"description":"A gernmal speciality","id":"m2","name":"Schn","price":15.3},{"amount":5,"description":"a maharashtra speciality","id":"m3","name":"Puran Poli","price":100}]'
+            example: '"orderedItems":[{"amount":1,"description":"finest fish and veggies","id":"m1","name":"Sushi","price":22.99},{"amount":1,"description":"A gernmal speciality","id":"m2","name":"Schn","price":15.3},{"amount":5,"description":"a maharashtra speciality","id":"m3","name":"Puran Poli","price":100}]'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Orders
+      summary: get all orders
+      operationId: getallorders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The order ID
+    get:
+      tags:
+      - Orders
+      summary: get single order
+      operationId: getsingleorder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders/showAllMyOrders:
+    get:
+      tags:
+      - Orders
+      summary: show current user orders
+      operationId: showcurrentuserorders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    logoutrequest:
+      title: logoutrequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: pushpa
+        email: pushpatarode1@gmail.com
+        password: secreat
+    registerrequest:
+      title: registerrequest
+      required:
+      - name
+      - email
+      - password
+      - role
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      example:
+        name: aditi
+        email: adititarode1@gmail.com
+        password: secreat
+        role: teacher
+    loginuserrequest:
+      title: loginuserrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: shashitarode@gmail.com
+        password: secreat
+    updatepasswordrequest:
+      title: updatepasswordrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: shashitarode@gmail.com
+        password: secreat
+    createproductrequest:
+      title: createproductrequest
+      required:
+      - name
+      - price
+      - colors
+      - company
+      - description
+      - category
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+          format: int32
+        colors:
+          type: array
+          items:
+            type: string
+          description: ''
+        company:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+      example:
+        name: shashi sectional
+        price: 109999
+        colors:
+        - '#000'
+        - '#ffb900'
+        company: liddy
+        description: Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
+        category: kitchen
+    updateproductrequest:
+      title: updateproductrequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: shashi-testing
+tags:
+- name: Auth
+- name: Products
+- name: Orders

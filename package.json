@@ -29,8 +29,10 @@
     "nodemailer": "^6.9.3",
     "nodemailer-mailgun-transport": "^2.1.5",
     "path": "^0.12.7",
+    "swagger-ui-express": "^5.0.0",
     "validator": "^13.6.0",
-    "xss-clean": "^0.1.1"
+    "xss-clean": "^0.1.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.9"
